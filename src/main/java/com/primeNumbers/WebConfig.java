@@ -1,4 +1,4 @@
-	package com.restapi.PrimeNumberGeneration;
+	package com.primeNumbers;
 
 
 	import org.springframework.context.annotation.Configuration;

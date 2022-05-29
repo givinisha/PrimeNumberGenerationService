@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.restapi.PrimeNumberGeneration.Service;
+package com.primeNumbers.service;
 
 import java.util.Arrays;
+import com.primeNumbers.util.PrimeNumbersUtil;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,6 +22,11 @@ public class PrimeNumberGenerationImpl implements PrimeNumberGenerationService {
 	
 	 private final List<Integer>  primes;
 	
+	 public PrimeNumberGenerationImpl()
+	 {
+		this.primes = null;
+		
+	 }
 	  public PrimeNumberGenerationImpl(List<Integer> primes) {
 		    this.primes = primes;
 		  }
@@ -32,7 +37,8 @@ public class PrimeNumberGenerationImpl implements PrimeNumberGenerationService {
 	@Override
 	public List<Integer> getAllPrimeNumbersTillNUsingBruteForce(int upperLimit)
 	{
-		
+		/*
+		 * To test the catchable property
 		 try {
 			 System.out.println("Going to sleep for 3 Secs.. to simulate backend call.");
 			   				Thread.sleep(1000*3);
@@ -40,13 +46,14 @@ public class PrimeNumberGenerationImpl implements PrimeNumberGenerationService {
 				
 				e.printStackTrace();
 			}
+			*/
 		System.out.println("Prime Number is generated using Brute Force algorithm");
 	List<Integer> primeNumbers = new LinkedList<>();
     if (upperLimit >= 2) {
         primeNumbers.add(2);
     }
     for (int i = 3; i <= upperLimit; i += 2) {
-        if (isPrimeBruteForce(i)) {
+        if (PrimeNumbersUtil.isPrimeBruteForce(i)) {
             primeNumbers.add(i);
         }
     }
@@ -62,7 +69,7 @@ public class PrimeNumberGenerationImpl implements PrimeNumberGenerationService {
 	{
 		System.out.println("Prime Number is generated using Java8");
 		 return IntStream.rangeClosed(2, upperLimit)
-			      .filter(x -> isPrimeNumber(x)).boxed()
+			      .filter(x -> PrimeNumbersUtil.isPrimeNumberUsingJava8(x)).boxed()
 			      .collect(Collectors.toList());
     }
 	
@@ -91,24 +98,7 @@ public class PrimeNumberGenerationImpl implements PrimeNumberGenerationService {
 	    return primeNumbers;
 	}
 
-	/*
-	 * 
-	 * Private methods
-	 */
-	private static boolean isPrimeNumber(int number) {
-		IntPredicate isDivisible = index -> number % index == 0;
-        return number > 1 && IntStream.range(2, number).noneMatch(isDivisible);
-	}
 	
-	private static boolean isPrimeBruteForce(int number) {
-	    for (int i = 2; i*i <= number; i++) {
-	        if (number % i == 0) {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
-
 
 
 	

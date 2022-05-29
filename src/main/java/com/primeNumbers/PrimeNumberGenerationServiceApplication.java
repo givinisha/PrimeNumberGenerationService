@@ -1,4 +1,5 @@
-package com.restapi.PrimeNumberGeneration;
+package com.primeNumbers;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
